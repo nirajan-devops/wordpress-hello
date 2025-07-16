@@ -2,9 +2,9 @@
 
 namespace YourProject\Tests;
 
-use PHPUnit\Framework\TestCase;
+use WP_UnitTestCase;
 
-class SampleTest extends TestCase
+class SampleTest extends WP_UnitTestCase
 {
     public function testTrueIsTrue()
     {
@@ -14,5 +14,7 @@ class SampleTest extends TestCase
     public function testWordPressFunctionsAvailable()
     {
         $this->assertTrue(function_exists('add_action'));
+        $this->assertTrue(function_exists('apply_filters'));
+        $this->assertTrue(function_exists('get_post'));
     }
 }
