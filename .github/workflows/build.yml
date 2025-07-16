@@ -1,19 +1,15 @@
-name: WordPress CI (build)
+name: WordPress Hello CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  ci:
-    ##Replace <ORG‑OR‑USER> with your actual GitHub account / org name
+  test:
     uses: nirajan-devops/ci-workflows/.github/workflows/wordpress.yml@main
-
     with:
-      php-versions: '["8.2","8.3"]'      # Override default if you like
-      wp-version: 'latest'
-      run-phpcs: true
-      run-unit: true
-
-    
+      php-version: '8.2'
+      wordpress-version: 'latest'
+      test-command: 'composer test'

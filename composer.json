@@ -1,22 +1,24 @@
 {
-  "name": "acme/wordpress-site",
+  "name": "your-org/wordpress-hello",
+  "description": "WordPress Hello World project",
   "type": "project",
   "require": {
-    "acme/hello-world-plugin": "*"
+    "php": ">=7.4",
+    "johnpbloch/wordpress": "^6.0"
   },
   "require-dev": {
-    "wp-coding-standards/wpcs": "^3.0",
-    "phpstan/phpstan": "^1.11"
+    "phpunit/phpunit": "^9.0",
+    "brain/monkey": "^2.6",
+    "mockery/mockery": "^1.4"
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "wp-content/plugins/hello-world",
-      "options": { "symlink": true }
-    }
-  ],
   "scripts": {
-    "cs": "phpcs -p --standard=WordPress",
-    "test": "vendor/bin/phpunit"
+    "test": "phpunit",
+    "lint": "phpcs --standard=WordPress"
+  },
+  "config": {
+    "allow-plugins": {
+      "johnpbloch/wordpress-core-installer": true,
+      "johnpbloch/wordpress-core": true
+    }
   }
 }
