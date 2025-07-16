@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    # Replace <ORG‑OR‑USER> with your actual GitHub account / org name
+    ##Replace <ORG‑OR‑USER> with your actual GitHub account / org name
     uses: nirajan-devops/ci-workflows/.github/workflows/wordpress.yml@main
 
     with:
