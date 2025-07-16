@@ -12,10 +12,25 @@
     "brain/monkey": "^2.6",
     "mockery/mockery": "^1.4"
   },
+  "autoload": {
+    "psr-4": {
+      "YourProject\\": "wp-content/plugins/your-plugin/src",
+      "YourProject\\Tests\\": "tests"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "YourProject\\Tests\\": "tests"
+    }
+  },
   "scripts": {
     "test": "phpunit",
+    "test:ci": "phpunit --log-junit test-results.xml",
     "lint": "phpcs --standard=WordPress",
     "post-install-cmd": [
+      "cp wp-config-sample.php wp-config.php || true"
+    ],
+    "post-update-cmd": [
       "cp wp-config-sample.php wp-config.php || true"
     ]
   },
@@ -23,9 +38,18 @@
     "allow-plugins": {
       "johnpbloch/wordpress-core-installer": true,
       "johnpbloch/wordpress-core": true
-    }
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
   },
   "extra": {
-    "wordpress-install-dir": "wp"
-  }
+    "wordpress-install-dir": "wp",
+    "installer-paths": {
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/mu-plugins/{$name}/": ["type:wordpress-mu-plugin"],
+      "wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

@@ -1,15 +1,14 @@
-<phpunit
-    bootstrap="vendor/autoload.php"
-    colors="true"
-    >
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
     <testsuites>
         <testsuite name="Unit Tests">
-            <directory prefix="test-" suffix=".php">./tests/</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./wp-content/plugins/your-plugin</directory>
-        </whitelist>
-    </filter>
+    <php>
+        <const name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
+    </php>
 </phpunit>
