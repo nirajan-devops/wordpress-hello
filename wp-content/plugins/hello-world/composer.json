@@ -1,0 +1,21 @@
+{
+  "name": "acme/hello-world-plugin",
+  "description": "Demo plugin with tests",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require-dev": {
+    "phpunit/phpunit": "^10",
+    "wp-phpunit/wp-phpunit": "^8",
+    "wp-coding-standards/wpcs": "^3",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1"
+  },
+  "scripts": {
+    "cs": "phpcs -p --standard=WordPress",
+    "test": "phpunit --testsuite unit"
+  },
+  "autoload": {
+    "psr-4": {
+      "Acme\\HelloWorld\\": "src/"
+    }
+  }
+}

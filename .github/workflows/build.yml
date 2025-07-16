@@ -1,0 +1,19 @@
+name: WordPress CI (build)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    # Replace <ORG‑OR‑USER> with your actual GitHub account / org name
+    uses: nirajan-devops/ci-workflows/.github/workflows/wordpress.yml@main
+
+    with:
+      php-versions: '["8.2","8.3"]'      # Override default if you like
+      wp-version: 'latest'
+      run-phpcs: true
+      run-unit: true
+
+    
