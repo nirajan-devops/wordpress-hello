@@ -2,7 +2,7 @@ name: WordPress Hello CI
 
 on:
   push:
-    branches: [ main ]   ####### ETrigger on push to main branch
+    branches: [ main ]   ######## ETrigger on push to main branch
   pull_request:
     branches: [ main ]
 
