@@ -1,14 +1,9 @@
 <?php
-// Path to WordPress tests
-$wp_tests_dir = getenv('WP_TESTS_DIR') ? getenv('WP_TESTS_DIR') : '/tmp/wordpress-tests-lib';
+require_once getenv('WP_TESTS_DIR') . '/includes/functions.php';
 
-// Load WordPress test environment
-require_once $wp_tests_dir . '/includes/functions.php';
-
-// Load WordPress
-function _manually_load_plugin() {
-    require dirname(dirname(__FILE__)) . '/wp-content/plugins/your-plugin/your-plugin.php';
+function _manually_load_environment() {
+    // Load your plugin or theme here if needed
 }
-tests_add_filter('muplugins_loaded', '_manually_load_plugin');
+tests_add_filter('muplugins_loaded', '_manually_load_environment');
 
-require $wp_tests_dir . '/includes/bootstrap.php';
+require getenv('WP_TESTS_DIR') . '/includes/bootstrap.php';
