@@ -1,11 +1,13 @@
-<phpunit bootstrap="tests/bootstrap.php">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/bootstrap.php" colors="true" verbose="true">
     <testsuites>
         <testsuite name="Unit Tests">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
     <php>
-        <const name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
-        <const name="ABSPATH" value="/tmp/wordpress/"/>
+        <!-- Set these as env vars instead of constants for flexibility -->
+        <env name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
+        <env name="WP_ROOT_DIR" value="/tmp/wordpress"/>
     </php>
 </phpunit>

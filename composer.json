@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "php vendor/bin/phpunit",
-    "test:ci": "php vendor/bin/phpunit --log-junit test-results.xml",   
+    "test:ci": "phpunit --configuration=phpunit.xml.dist",
     "lint": "phpcs --standard=WordPress",
     "post-install-cmd": [
       "cp wp-config-sample.php wp-config.php || true"
