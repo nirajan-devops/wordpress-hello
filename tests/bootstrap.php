@@ -3,7 +3,7 @@
 $_tests_dir = getenv('WP_TESTS_DIR') ?: '/tmp/wordpress-tests-lib';
 
 // Manually define ABSPATH before loading WordPress test tools
-define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+//define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 
 // Load WordPress test functions
 require_once $_tests_dir . '/includes/functions.php';
