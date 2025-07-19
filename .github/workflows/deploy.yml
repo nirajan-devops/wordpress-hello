@@ -21,12 +21,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      #- name: Set up SSH
-        #run: |
-          #mkdir -p ~/.ssh
-          #echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          #chmod 600 ~/.ssh/id_rsa
-          #ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
       #- name: Upload project files to EC2
         #run: |
