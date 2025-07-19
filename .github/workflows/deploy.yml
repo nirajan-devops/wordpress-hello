@@ -2,31 +2,47 @@ name: Deploy WordPress to EC2
 
 on:
   push:
-    branches: [main]
-    paths-ignore:
-      - '.github/workflows/build.yml'
+    branches:
+      - main
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'docker-compose.yml'
+      - '**.php'
+      - '**.html'
+      - '**.css'
+      - '**.js'
 
 jobs:
   deploy:
+    name: Deploy to EC2 Instance
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-      - name: Copy project files to EC2
-        run: |
-          rsync -avz -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.USERNAME }}/wordpress-hello/   
-      - name: Deploy with Docker Compose
+      #- name: Set up SSH
+        #run: |
+          #mkdir -p ~/.ssh
+          #echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          #chmod 600 ~/.ssh/id_rsa
+          #ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      #- name: Upload project files to EC2
+        #run: |
+          #rsync -avz -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.USERNAME }}/wordpress-hello/
+
+      - name: Install Docker and Run Docker Compose
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
-            cd wordpress-app
-            docker compose down || true
-            docker compose up -d --build
+            sudo apt update -y
+            sudo apt install -y docker.io docker-compose
+
+            sudo systemctl enable docker
+            sudo systemctl start docker
+
+            cd /home/${{ secrets.USERNAME }}/wordpress-hello
+
+            sudo docker compose down || true
+            sudo docker compose up -d --build
           EOF
