@@ -20,14 +20,12 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-
       - name: Copy project files to EC2
         run: |
-          scp -i ~/.ssh/id_rsa -r . ec2-user@${{ secrets.HOST }}:/home/ec2-user/wordpress-app
-
+          rsync -avz -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.USERNAME }}/wordpress-hello/   
       - name: Deploy with Docker Compose
         run: |
-          ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             cd wordpress-app
             docker compose down || true
             docker compose up -d --build
