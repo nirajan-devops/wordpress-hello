@@ -36,11 +36,22 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
             sudo apt update -y
-            sudo apt install -y docker.io docker-compose
+            sudo apt install -y docker.io curl
+      
+            # Install Docker Compose V2 plugin
+            DOCKER_CONFIG=${HOME}/.docker
+            mkdir -p $DOCKER_CONFIG/cli-plugins
+            curl -SL https://github.com/docker/compose/releases/download/v2.24.4/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+            chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 
+            # Enable and start Docker
             sudo systemctl enable docker
             sudo systemctl start docker
 
+            # Check Docker Compose version to confirm
+            docker compose version
+
+            # Go to the app directory and run containers
             cd /home/${{ secrets.USERNAME }}/wordpress-hello
 
             sudo docker compose down || true
