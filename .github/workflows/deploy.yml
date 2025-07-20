@@ -28,7 +28,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      #- name: Upload project files to EC2
+      ##- name: Upload project files to EC2
         #run: |
           #rsync -avz -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/${{ secrets.USERNAME }}/wordpress-hello/
 
