@@ -39,7 +39,7 @@ jobs:
             sudo apt install -y docker.io curl
       
             # Install Docker Compose V2 plugin
-            DOCKER_CONFIG=${HOME}/.docker
+            export DOCKER_CONFIG=/home/${USER}/.docker
             mkdir -p $DOCKER_CONFIG/cli-plugins
             curl -SL https://github.com/docker/compose/releases/download/v2.24.4/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
             chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
