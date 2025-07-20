@@ -1,4 +1,4 @@
-name: Deploy WordPress to EC2   ## WordPress deployment workflow
+name: Deploy WordPress to EC2
 
 on:
   push:
@@ -39,10 +39,10 @@ jobs:
             sudo apt install -y docker.io curl
       
             # Install Docker Compose V2 plugin
-            export DOCKER_CONFIG=/home/${USER}/.docker
-            sudo mkdir -p /usr/local/lib/docker/cli-plugins
-            sudo curl -SL https://github.com/docker/compose/releases/download/v2.24.4/docker-compose-linux-x86_64 \ -o /usr/local/lib/docker/cli-plugins/docker-compose
-            sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+            DOCKER_CONFIG=${HOME}/.docker
+            mkdir -p $DOCKER_CONFIG/cli-plugins
+            curl -SL https://github.com/docker/compose/releases/download/v2.24.4/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+            chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 
             # Enable and start Docker
             sudo systemctl enable docker
