@@ -54,6 +54,6 @@ jobs:
             # Go to the app directory and run containers
             cd /home/${{ secrets.USERNAME }}/wordpress-hello
 
-            sudo docker compose down || true
-            sudo docker compose up -d --build
+             docker compose down || true
+             docker compose up -d --build
           EOF
