@@ -1,16 +1,16 @@
 name: Deploy WordPress to EC2
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/deploy.yml'
-      - 'docker-compose.yml'
-      - '**.php'
-      - '**.html'
-      - '**.css'
-      - '**.js'
+#on:
+  #push:
+    #branches:
+      #- main
+    #paths:
+      #- '.github/workflows/deploy.yml'
+      #- 'docker-compose.yml'
+      #- '**.php'
+      #- '**.html'
+      #- '**.css'
+      #- '**.js'
 
 jobs:
   deploy:
