@@ -1,17 +1,21 @@
-name: WordPress Hello CI
+name: Deploy Dockerized App    ### This workflow deploys a Dockerized application to an EC2 instance using GitHub Actions.
 
 on:
   push:
-    branches: [ main ]   ################# ETrigger on push to main branch
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  test:
-    uses: nirajan-devops/ci-workflows/.github/workflows/wordpress.yml@main
-    secrets: 
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  deploy:
+    uses: nirajan-devops/ci-workflows/.github/workflows/cicd.yml@main
     with:
-      php-version: '8.2'
-      wordpress-version: 'latest'
-      test-command: 'composer test'
+      image-name: wordpress-app
+      container-name: wordpress-app
+      port: "3000"
+      container-port: "80"
+    secrets:
+      HOST: ${{ secrets.HOST }}
+      USERNAME: ${{ secrets.USERNAME }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
