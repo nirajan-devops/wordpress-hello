@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   wordpress:
-    image: wordpress:latest
+    image: ghcr.io/$GHCR_USERNAME/wordpress-app:latest  # Will be replaced
     ports:
       - "3000:80"
     environment:
@@ -10,8 +10,8 @@ services:
       WORDPRESS_DB_USER: wp_user
       WORDPRESS_DB_PASSWORD: wp_pass
       WORDPRESS_DB_NAME: wp_db
-    volumes:
-      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - db
 
   db:
     image: mysql:5.7
@@ -20,3 +20,8 @@ services:
       MYSQL_USER: wp_user
       MYSQL_PASSWORD: wp_pass
       MYSQL_ROOT_PASSWORD: root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
