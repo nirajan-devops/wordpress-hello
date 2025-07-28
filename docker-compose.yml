@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   wordpress:
-    image: ghcr.io/$GHCR_USERNAME/wordpress-app:latest  # Will be replaced
+    image: ghcr.io/nirajan-devops/wordpress-app:latest  # Will be replaced
     ports:
       - "3000:80"
     environment:

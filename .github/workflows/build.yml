@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    uses: nirajan-devops/ci-workflows/.github/workflows/cinew.yml@main
+    uses: nirajan-devops/ci-workflows/.github/workflows/ci.yml@main
     with:
       image-name: wordpress-app
       container-name: wordpress-app
